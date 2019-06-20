@@ -3,6 +3,7 @@ package project.euler;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,10 +42,11 @@ public class LargeSum13 {
 
 		List<Integer> sumOfDigits = new ArrayList<>();
 
+		int placeHolder = 0;
+
 		for (int i = 50; i > 0; i--) {
 
 			int digitSum = 0;
-			int placeHolder = 0;
 
 			for (String[] number : this.getNumbers()) {
 				digitSum += Integer.parseInt(number[0].split("")[i - 1]);
@@ -52,12 +54,14 @@ public class LargeSum13 {
 
 			digitSum += placeHolder;
 
-			if (sumOfDigits.size() < 50) {
+			if (i != 1) {
 				placeHolder = digitSum / 10;
+				sumOfDigits.add(0, digitSum % 10);
+			} else {
+				sumOfDigits.add(0, digitSum);
 			}
 
-			sumOfDigits.add(digitSum % 10);
-
+			
 		}
 
 		return sumOfDigits.stream().map(i -> String.valueOf(i)).reduce("", (acc, c) -> acc += c);
@@ -65,8 +69,9 @@ public class LargeSum13 {
 	}
 
 	public static void main(String[] args) {
-
-		String input = "37107287533902102798797998220837590246510135740250\r\n"
+		//@formatter:off
+		String input = ""
+				+ "37107287533902102798797998220837590246510135740250\r\n"
 				+ "46376937677490009712648124896970078050417018260538\r\n"
 				+ "74324986199524741059474233309513058123726617309629\r\n"
 				+ "91942213363574161572522430563301811072406154908250\r\n"
@@ -166,20 +171,31 @@ public class LargeSum13 {
 				+ "72107838435069186155435662884062257473692284509516\r\n"
 				+ "20849603980134001723930671666823555245252804609722\r\n"
 				+ "53503534226472524250874054075591789781264330331690";
-
+		//@formatter:off
+		
 		LargeSum13 object = new LargeSum13(input);
 		// Arrays.stream(object.getNumbers()).forEach(array ->
 		// System.out.println(Arrays.toString(array)));
 		System.out.println(object.calculateSum());
 		System.out.println(object.calculateSumVanilla());
 		// System.out.println(object.calculateSum().substring(0, 10));
-
-//		int sum = 0;
-//		for (String[] a : object.getNumbers()) {
-//			sum += Integer.parseInt(a[0].split("")[49]);
-//		}
-//
+		
+		List<Integer> digits = new ArrayList<>();
+		int sum = 0;
+		int placeholder = 0;
+		for (String[] a : object.getNumbers()) {
+			sum += Integer.parseInt(a[0].split("")[49]);
+		}
+		sum += placeholder;
+		placeholder = sum / 10;
+		
+		digits.add(sum % 10);
+		
+		
 //		System.out.println(sum);
+		
+		
+		
 	}
 
 }
