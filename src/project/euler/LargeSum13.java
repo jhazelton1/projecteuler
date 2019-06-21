@@ -3,7 +3,6 @@ package project.euler;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +28,7 @@ public class LargeSum13 {
 	}
 
 	private String calculateSum() {
+
 		BigInteger bigInteger = new BigInteger("0");
 
 		for (String[] number : this.getNumbers()) {
@@ -61,7 +61,6 @@ public class LargeSum13 {
 				sumOfDigits.add(0, digitSum);
 			}
 
-			
 		}
 
 		return sumOfDigits.stream().map(i -> String.valueOf(i)).reduce("", (acc, c) -> acc += c);
@@ -178,21 +177,9 @@ public class LargeSum13 {
 		// System.out.println(Arrays.toString(array)));
 		System.out.println(object.calculateSum());
 		System.out.println(object.calculateSumVanilla());
-		// System.out.println(object.calculateSum().substring(0, 10));
+		 System.out.println(object.calculateSum().substring(0, 10));
+		System.out.println(object.calculateSumVanilla().substring(0, 10));
 		
-		List<Integer> digits = new ArrayList<>();
-		int sum = 0;
-		int placeholder = 0;
-		for (String[] a : object.getNumbers()) {
-			sum += Integer.parseInt(a[0].split("")[49]);
-		}
-		sum += placeholder;
-		placeholder = sum / 10;
-		
-		digits.add(sum % 10);
-		
-		
-//		System.out.println(sum);
 		
 		
 		
